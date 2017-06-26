@@ -29,4 +29,6 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
     compile 'com.android.support:recyclerview-v7:25.1.0'
+
+    compile 'de.greenrobot:eventbus:2.2.1'
 }

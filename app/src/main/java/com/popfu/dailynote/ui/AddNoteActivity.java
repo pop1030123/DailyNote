@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.popfu.dailynote.AddNoteEvent;
 import com.popfu.dailynote.R;
 import com.popfu.dailynote.bean.Note;
 import com.popfu.dailynote.presenter.AddNotePresenter;
@@ -16,6 +17,8 @@ import com.popfu.dailynote.ui.toast.ToastUtil;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by pengfu on 26/06/2017.
@@ -56,6 +59,7 @@ public class AddNoteActivity extends Activity implements View.OnClickListener {
                 }else{
                     Note note = new Note(content) ;
                     mPresenter.addNote(note);
+                    EventBus.getDefault().post(new AddNoteEvent(note));
                     ToastUtil.show("save content");
                 }
                 finish();
