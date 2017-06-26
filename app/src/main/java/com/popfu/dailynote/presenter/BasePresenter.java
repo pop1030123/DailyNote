@@ -1,10 +1,10 @@
-package com.popfu.dailynote;
+package com.popfu.dailynote.presenter;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-
-import java.sql.SQLException;
+import com.popfu.dailynote.DNApp;
+import com.popfu.dailynote.bean.Note;
+import com.popfu.dailynote.db.DatabaseHelper;
 
 /**
  * Created by pengfu on 24/06/2017.

@@ -1,4 +1,4 @@
-package com.popfu.dailynote;
+package com.popfu.dailynote.util;
 
 import android.util.Log;
 

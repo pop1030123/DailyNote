@@ -1,4 +1,4 @@
-package com.popfu.dailynote;
+package com.popfu.dailynote.db;
 
 
 import android.content.Context;
@@ -9,6 +9,8 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.popfu.dailynote.util.L;
+import com.popfu.dailynote.bean.Note;
 
 import java.sql.SQLException;
 

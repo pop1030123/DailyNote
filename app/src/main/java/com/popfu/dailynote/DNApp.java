@@ -3,6 +3,8 @@ package com.popfu.dailynote;
 import android.app.Application;
 import android.content.Context;
 
+import com.popfu.dailynote.ui.toast.ToastUtil;
+
 /**
  * Created by pengfu on 24/06/2017.
  */
@@ -22,5 +24,6 @@ public class DNApp extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this ;
+        ToastUtil.initialize(this);
     }
 }
