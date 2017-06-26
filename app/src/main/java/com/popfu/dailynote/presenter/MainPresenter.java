@@ -10,7 +10,7 @@ import java.util.List;
  * Created by pengfu on 24/06/2017.
  */
 
-public class MainPresenter extends BasePresenter {
+public class MainPresenter extends NotePresenter {
 
 
     public List<Note> getNotes() {
@@ -18,6 +18,8 @@ public class MainPresenter extends BasePresenter {
         L.d("所有的notes:" + notes);
         return notes;
     }
+
+
 
 
 }

@@ -1,4 +1,4 @@
-package com.popfu.dailynote;
+package com.popfu.dailynote.event;
 
 import com.popfu.dailynote.bean.Note;
 
