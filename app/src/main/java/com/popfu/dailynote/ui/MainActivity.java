@@ -119,6 +119,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 EditNoteActivity_.intent(this)
                         .extra(KEY_EDIT ,false)
                         .start() ;
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left) ;
                 break ;
         }
     }
@@ -130,5 +131,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 .extra(KEY_EDIT ,true)
                 .extra(KEY_NOTE_ID ,mNoteList.get(position).getId())
                 .start() ;
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left) ;
     }
 }

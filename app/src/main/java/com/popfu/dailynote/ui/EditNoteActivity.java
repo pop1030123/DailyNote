@@ -71,39 +71,50 @@ public class EditNoteActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        onPageFinished() ;
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.left_button:
-                String content = mEditText.getEditableText().toString() ;
-                if(TextUtils.isEmpty(content)){
-                    if(isEdit){
-                        int count = mPresenter.deleteNote(mNoteId) ;
-                        EventBus.getDefault().post(new DeleteNoteEvent(mNoteId));
-                        L.d("删除note:"+mNoteId+"/"+count);
-                    }else{
-                        ToastUtil.show("No content.");
-                    }
-                }else{
-                    if(isEdit){
-                        // 修改内容
-                        if(content.equals(mOldNote.getContent())){
-                            // 无内容修改
-                            ToastUtil.show("No content changed.");
-                        }else{
-                            // 内容已经修改，存库，提示
-                            mOldNote.setContent(content);
-                            mPresenter.updateNote(mOldNote) ;
-                            EventBus.getDefault().post(new UpdateNoteEvent(mOldNote.getId()));
-                        }
-                    }else{
-                        Note note = new Note(content) ;
-                        mPresenter.addNote(note);
-                        EventBus.getDefault().post(new AddNoteEvent(note));
-                        ToastUtil.show("Content saved.");
-                    }
-                }
-                finish();
+                onPageFinished() ;
                 break ;
         }
+    }
+
+    private void onPageFinished(){
+        String content = mEditText.getEditableText().toString() ;
+        if(TextUtils.isEmpty(content)){
+            if(isEdit){
+                int count = mPresenter.deleteNote(mNoteId) ;
+                EventBus.getDefault().post(new DeleteNoteEvent(mNoteId));
+                L.d("删除note:"+mNoteId+"/"+count);
+            }else{
+                ToastUtil.show("No content.");
+            }
+        }else{
+            if(isEdit){
+                // 修改内容
+                if(content.equals(mOldNote.getContent())){
+                    // 无内容修改
+                    ToastUtil.show("No content changed.");
+                }else{
+                    // 内容已经修改，存库，提示
+                    mOldNote.setContent(content);
+                    mPresenter.updateNote(mOldNote) ;
+                    EventBus.getDefault().post(new UpdateNoteEvent(mOldNote.getId()));
+                }
+            }else{
+                Note note = new Note(content) ;
+                mPresenter.addNote(note);
+                EventBus.getDefault().post(new AddNoteEvent(note));
+                ToastUtil.show("Content saved.");
+            }
+        }
+        finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right) ;
     }
 }
