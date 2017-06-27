@@ -3,7 +3,9 @@ package com.popfu.dailynote.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,7 +30,7 @@ import de.greenrobot.event.EventBus;
  */
 
 @EActivity(R.layout.act_edit_note)
-public class EditNoteActivity extends Activity implements View.OnClickListener {
+public class EditNoteActivity extends Activity implements View.OnClickListener, TextWatcher {
 
 
     public static final String KEY_EDIT = "key_edit" ;
@@ -41,6 +43,8 @@ public class EditNoteActivity extends Activity implements View.OnClickListener {
 
     @ViewById(R.id.edit_text)
     EditText mEditText ;
+    @ViewById(R.id.count)
+    TextView mCountView ;
 
     @ViewById(R.id.left_button)
     TextView mLeftView ;
@@ -64,10 +68,12 @@ public class EditNoteActivity extends Activity implements View.OnClickListener {
         mLeftView.setText("Back");
         mLeftView.setOnClickListener(this);
         mRightView.setVisibility(View.INVISIBLE);
+        mEditText.addTextChangedListener(this);
         if(isEdit && mNoteId > 0){
             mOldNote = mPresenter.getNote(mNoteId) ;
             mEditText.setText(mOldNote.getContent());
         }
+        updateCount() ;
     }
 
     @Override
@@ -116,5 +122,25 @@ public class EditNoteActivity extends Activity implements View.OnClickListener {
         }
         finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right) ;
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        updateCount() ;
+    }
+
+
+    private void updateCount(){
+        mCountView.setText(""+mEditText.getText().length());
     }
 }
