@@ -73,6 +73,7 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
             mOldNote = mPresenter.getNote(mNoteId) ;
             mEditText.setText(mOldNote.getContent());
         }
+        mEditText.setSelection(mEditText.getText().length());
         updateCount() ;
     }
 
