@@ -84,7 +84,7 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         onPageFinished() ;
     }
 
@@ -127,7 +127,7 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
             }
         }
         finish();
-        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right) ;
+        overridePendingTransition(R.anim.slide_in_left,0) ;
     }
 
     @Override

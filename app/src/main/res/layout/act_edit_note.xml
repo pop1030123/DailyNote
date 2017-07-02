@@ -4,8 +4,8 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     android:background="#fff"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingLeft="@dimen/main_padding"
+    android:paddingRight="@dimen/main_padding">
 
     <include layout="@layout/title_bar"/>
     <EditText
@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="top"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@drawable/bg_item"
+        android:padding="@dimen/item_padding"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
