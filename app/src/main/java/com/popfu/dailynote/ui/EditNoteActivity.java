@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.transition.Slide;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -52,9 +53,13 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
     @ViewById(R.id.right_button)
     TextView mRightView ;
 
+    SlideBackLayout mSlideBackLayout ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSlideBackLayout = new SlideBackLayout(this) ;
+        mSlideBackLayout.bind();
         mPresenter = new EditNotePresenter() ;
         isEdit = getIntent().getBooleanExtra(KEY_EDIT ,false) ;
         if(isEdit)

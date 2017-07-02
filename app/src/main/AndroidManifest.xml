@@ -28,7 +28,7 @@
         <activity
             android:name=".ui.EditNoteActivity_"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+            android:theme="@style/TransparentBGTheme"/>
     </application>
 
 </manifest>
