@@ -6,7 +6,7 @@
               android:background="@drawable/bg_item"
               android:orientation="horizontal">
 
-    <TextView
+    <io.github.rockerhieu.emojicon.EmojiconTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_item_height"

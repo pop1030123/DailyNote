@@ -1,14 +1,14 @@
 package com.popfu.dailynote.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.transition.Slide;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.popfu.dailynote.event.AddNoteEvent;
@@ -24,14 +24,22 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.Arrays;
+
 import de.greenrobot.event.EventBus;
+import io.github.rockerhieu.emojicon.EmojiconEditText;
+import io.github.rockerhieu.emojicon.EmojiconGridFragment;
+import io.github.rockerhieu.emojicon.EmojiconPage;
+import io.github.rockerhieu.emojicon.EmojiconsFragment;
+import io.github.rockerhieu.emojicon.EmojiconsView;
+import io.github.rockerhieu.emojicon.emoji.Emojicon;
 
 /**
  * Created by pengfu on 26/06/2017.
  */
 
 @EActivity(R.layout.act_edit_note)
-public class EditNoteActivity extends Activity implements View.OnClickListener, TextWatcher {
+public class EditNoteActivity extends FragmentActivity implements EmojiconGridFragment.OnEmojiconClickedListener, EmojiconsFragment.OnEmojiconBackspaceClickedListener , View.OnClickListener, TextWatcher {
 
 
     public static final String KEY_EDIT = "key_edit" ;
@@ -43,7 +51,7 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
     private Note mOldNote ;
 
     @ViewById(R.id.edit_text)
-    EditText mEditText ;
+    EmojiconEditText mEditText ;
     @ViewById(R.id.count)
     TextView mCountView ;
 
@@ -52,6 +60,11 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
 
     @ViewById(R.id.right_button)
     TextView mRightView ;
+
+    @ViewById(R.id.emoji_icon)
+    ImageView mEmojiIcon ;
+    @ViewById(R.id.emojicons_view)
+    EmojiconsView mEmojiconsView ;
 
     SlideBackLayout mSlideBackLayout ;
 
@@ -72,8 +85,18 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
     void afterViews(){
         mLeftView.setText("Back");
         mLeftView.setOnClickListener(this);
+        mEmojiIcon.setOnClickListener(this);
         mRightView.setVisibility(View.INVISIBLE);
         mEditText.addTextChangedListener(this);
+
+        mEmojiconsView.setPages(Arrays.asList(
+                new EmojiconPage(Emojicon.TYPE_PEOPLE, null, false, R.drawable.ic_emoji_people_light),
+                new EmojiconPage(Emojicon.TYPE_NATURE, null, false, R.drawable.ic_emoji_nature_light),
+                new EmojiconPage(Emojicon.TYPE_OBJECTS, null, false, R.drawable.ic_emoji_objects_light),
+                new EmojiconPage(Emojicon.TYPE_PLACES, null, false, R.drawable.ic_emoji_places_light),
+                new EmojiconPage(Emojicon.TYPE_SYMBOLS, null, false, R.drawable.ic_emoji_symbols_light)
+        ) ,this);
+
         if(isEdit && mNoteId > 0){
             mOldNote = mPresenter.getNote(mNoteId) ;
             mEditText.setText(mOldNote.getContent());
@@ -84,7 +107,6 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         onPageFinished() ;
     }
 
@@ -96,6 +118,7 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
                 break ;
         }
     }
+
 
     private void onPageFinished(){
         String content = mEditText.getEditableText().toString() ;
@@ -148,5 +171,17 @@ public class EditNoteActivity extends Activity implements View.OnClickListener, 
 
     private void updateCount(){
         mCountView.setText(""+mEditText.getText().length());
+    }
+
+    @Override
+    public void onEmojiconClicked(Emojicon emojicon) {
+        L.d("onEmojiconClicked:"+emojicon);
+        EmojiconsFragment.input(mEditText, emojicon);
+    }
+
+    @Override
+    public void onEmojiconBackspaceClicked(View v) {
+        L.d("onEmojiconBackspaceClicked:"+v);
+        EmojiconsFragment.backspace(mEditText);
     }
 }

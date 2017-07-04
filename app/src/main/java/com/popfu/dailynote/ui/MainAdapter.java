@@ -12,6 +12,8 @@ import com.popfu.dailynote.bean.Note;
 
 import java.util.List;
 
+import io.github.rockerhieu.emojicon.EmojiconTextView;
+
 /**
  * Created by pengfu on 26/06/2017.
  */
@@ -64,11 +66,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ItemHolder> {
 
     class ItemHolder extends RecyclerView.ViewHolder{
 
-        TextView titleView ;
+        EmojiconTextView titleView ;
 
         public ItemHolder(View itemView) {
             super(itemView);
-            titleView = (TextView) itemView.findViewById(R.id.text) ;
+            titleView = (EmojiconTextView) itemView.findViewById(R.id.text) ;
         }
     }
 
