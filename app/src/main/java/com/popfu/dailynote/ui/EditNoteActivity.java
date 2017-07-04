@@ -39,7 +39,7 @@ import io.github.rockerhieu.emojicon.emoji.Emojicon;
  */
 
 @EActivity(R.layout.act_edit_note)
-public class EditNoteActivity extends FragmentActivity implements EmojiconGridFragment.OnEmojiconClickedListener, EmojiconsFragment.OnEmojiconBackspaceClickedListener , View.OnClickListener, TextWatcher {
+public class EditNoteActivity extends FragmentActivity implements EmojiconGridFragment.OnEmojiconClickedListener, EmojiconsView.OnEmojiconBackspaceClickedListener , View.OnClickListener, TextWatcher {
 
 
     public static final String KEY_EDIT = "key_edit" ;
@@ -95,7 +95,7 @@ public class EditNoteActivity extends FragmentActivity implements EmojiconGridFr
                 new EmojiconPage(Emojicon.TYPE_OBJECTS, null, false, R.drawable.ic_emoji_objects_light),
                 new EmojiconPage(Emojicon.TYPE_PLACES, null, false, R.drawable.ic_emoji_places_light),
                 new EmojiconPage(Emojicon.TYPE_SYMBOLS, null, false, R.drawable.ic_emoji_symbols_light)
-        ) ,this);
+        ) ,this ,this);
 
         if(isEdit && mNoteId > 0){
             mOldNote = mPresenter.getNote(mNoteId) ;

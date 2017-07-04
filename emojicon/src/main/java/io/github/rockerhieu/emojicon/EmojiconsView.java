@@ -49,6 +49,12 @@ public class EmojiconsView extends FrameLayout implements ViewPager.OnPageChange
     private View[] mTabs;
     private View mLastTab;
 
+    private OnEmojiconBackspaceClickedListener mOnEmojiconBackspaceClickedListener;
+
+    public interface OnEmojiconBackspaceClickedListener {
+        void onEmojiconBackspaceClicked(View v);
+    }
+
     public EmojiconsView(Context context) {
         this(context, null);
     }
@@ -58,6 +64,14 @@ public class EmojiconsView extends FrameLayout implements ViewPager.OnPageChange
         LayoutInflater.from(context).inflate(R.layout.emojicons_view, this);
         mViewPager = (ViewPager) findViewById(R.id.emojis_pager);
         mTabsContainer = (ViewGroup) findViewById(R.id.emojis_tab);
+        findViewById(R.id.emojis_backspace).setOnTouchListener(new EmojiconsFragment.RepeatListener(1000, 50, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnEmojiconBackspaceClickedListener != null) {
+                    mOnEmojiconBackspaceClickedListener.onEmojiconBackspaceClicked(v);
+                }
+            }
+        }));
     }
 
     @Override
@@ -72,7 +86,7 @@ public class EmojiconsView extends FrameLayout implements ViewPager.OnPageChange
         mViewPager.removeOnPageChangeListener(this);
     }
 
-    public void setPages(@NonNull List<EmojiconPage> pages ,EmojiconGridFragment.OnEmojiconClickedListener onEmojiconClickedListener) {
+    public void setPages(@NonNull List<EmojiconPage> pages ,EmojiconGridFragment.OnEmojiconClickedListener onEmojiconClickedListener ,OnEmojiconBackspaceClickedListener backspaceClickedListener) {
         this.mPages = pages;
         if (mTabs == null || mTabs.length != pages.size()) {
             mTabs = new View[pages.size()];
@@ -91,6 +105,7 @@ public class EmojiconsView extends FrameLayout implements ViewPager.OnPageChange
         }
         onPageSelected(0);
         mViewPager.setAdapter(new EmojiconGridViewPagerAdapter(getContext(), pages ,onEmojiconClickedListener));
+        mOnEmojiconBackspaceClickedListener = backspaceClickedListener ;
     }
 
     private void addTabDivider() {
