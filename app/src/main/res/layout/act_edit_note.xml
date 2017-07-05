@@ -3,6 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#fff"
+              android:id="@+id/rootView"
               android:orientation="vertical">
 
     <include layout="@layout/title_bar"/>
@@ -13,6 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/bg_item"
+        android:textSize="24sp"
         android:gravity="top"
         android:padding="@dimen/item_padding"
         android:layout_margin="@dimen/main_padding"
@@ -32,18 +34,31 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:background="#eee"
+        android:gravity="right|center_vertical">
 
         <ImageView
-            android:id="@+id/emoji_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:src="@drawable/emoji"/>
+            android:id="@+id/toggle_keyboard_emoji"
+            android:layout_width="@dimen/ic_size"
+            android:layout_height="@dimen/ic_size"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_emoji"
+            android:layout_marginRight="5dp"/>
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="@dimen/ic_size"
+            android:layout_height="@dimen/ic_size"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_delete"
+            android:layout_marginRight="5dp"/>
+
     </LinearLayout>
 
-    <io.github.rockerhieu.emojicon.EmojiconsView
+    <FrameLayout
         android:id="@+id/emojicons_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        />
 </LinearLayout>

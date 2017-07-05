@@ -115,13 +115,13 @@ public class EmojiconsView extends FrameLayout implements ViewPager.OnPageChange
         } else {
             mViewPager.setBackgroundColor(getContext().getColor(R.color.horizontal_vertical));
         }
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(1, LinearLayout.LayoutParams.WRAP_CONTENT);
         mTabsContainer.addView(divider, mTabsContainer.getChildCount() - 2, params);
     }
 
     private void addTabIcon(EmojiconPage page, int index) {
         ImageButton icon = new ImageButton(getContext());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.weight = 1;
 //        icon.setBackground(null);
         icon.setBackgroundColor(Color.TRANSPARENT);
